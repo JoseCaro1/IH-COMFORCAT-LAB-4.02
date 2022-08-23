@@ -1,0 +1,80 @@
+package com.ironhack.lab402.models;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ironhack.lab402.enums.Department;
+import com.ironhack.lab402.enums.Status;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.List;
+
+@Entity
+public class Doctor {
+
+    @Id
+    private Long employeeId;
+
+
+    @Enumerated(EnumType.STRING)
+    private Department department;
+
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @OneToMany(mappedBy = "admittedBy")
+    private List<Patient> patientList;
+
+    public Doctor() {
+    }
+
+    public Doctor(Long employeeId, Department department, String name, Status status, List<Patient> patientList) {
+        this.employeeId = employeeId;
+        this.department = department;
+        this.name = name;
+        this.status = status;
+        this.patientList = patientList;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public List<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(List<Patient> patientList) {
+        this.patientList = patientList;
+    }
+}
